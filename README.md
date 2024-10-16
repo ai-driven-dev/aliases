@@ -1,22 +1,22 @@
-# AIDDC Aliases (in progress)
+# AI-Driven Dev {Aliases}
 
 A list of aliases and pre-written scripts to help you inject AI into your dev workflow.
 
-- [Installation](#installation)
-  - [LLM Configuration](#llm-configuration)
-  - [Local LLM with Ollama support](#local-llm-with-ollama-support)
-- [Development](#development)
+- [📦 Installation](#-installation)
+  - [Proprietary LLM: OpenAI](#proprietary-llm-openai)
+  - [Local LLM: Ollama support](#local-llm-ollama-support)
+- [💻 Development](#-development)
   - [Scripts](#scripts)
-- [Usage](#usage)
+- [🚀 Usage](#-usage)
 
-## Installation
+## 📦 Installation
 
 ```shell
 #!/bin/sh
 curl -sSf "https://raw.githubusercontent.com/alexsoyes/ai-driven-dev-community/main/scripts/aiddc/install.sh" | bash
 ```
 
-### LLM Configuration
+### Proprietary LLM: OpenAI
 
 Provide an OpenAI API key in the `.env` file.
 
@@ -30,9 +30,11 @@ Or directly in your `.bashrc` file.
 export OPENAI_API_KEY=sk-<your-api-key>
 ```
 
-### Local LLM with Ollama support
+### Local LLM: Ollama support
 
-If you want to use Ollama, you need to provide the following environment variables.
+Alternatively, you can use Ollama.
+
+You just need to provide the following environment variable:
 
 ```bash
 LOCAL_MODEL=codellama # deepseek-coder, qwen2 etc.
@@ -40,7 +42,7 @@ LOCAL_MODEL=codellama # deepseek-coder, qwen2 etc.
 
 Note: Responses might be way less effective than OpenAI's GPT calls.
 
-## Development
+## 💻 Development
 
 In the `aiddc` directory, you can run the following command to install the scripts locally and add the aliases to your `.bashrc` file.
 
@@ -53,7 +55,7 @@ cd scripts/aiddc
 bash install-local.sh && source ~/.bashrc && aidd-commit-msg  
 ```
 
--e ## Usage
+## 🚀 Usage
 
 ```text
 

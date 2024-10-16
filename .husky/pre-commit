@@ -12,10 +12,11 @@ echo "Running install-local.sh..."
 # Append the output of aidd-help to README.md
 # Replace "## Usage" until the end of the doc with the help
 echo "Updating README.md with aidd-help output..."
-sed -i '' '/## Usage/,$d' "$CURRENT_DIR/README.md"
+sed -i '' '/## 🚀 Usage/,$d' "$CURRENT_DIR/README.md"
 
 echo "Running aidd-help..."
-echo -e "## Usage\n" >> "$CURRENT_DIR/README.md"
+echo "## 🚀 Usage" >> "$CURRENT_DIR/README.md"
+echo "" >> "$CURRENT_DIR/README.md"
 echo '```text' >> "$CURRENT_DIR/README.md"
 bash "$CURRENT_DIR/scripts/aidd-help.sh" | sed 's/\\033\[[0-9;]*m//g' | sed 's/aidd-[^ ]*/`&`/g' >> "$CURRENT_DIR/README.md"
 echo '```' >> "$CURRENT_DIR/README.md"
