@@ -1,8 +1,5 @@
 #!/bin/sh
 
-set -e  # Exit on error
-set -x  # Print commands for debugging
-
 ###############################################################################
 # Script Name: "[folder]/aidd-[scriptName].sh" (e.g. "files/aidd-tree.sh")
 # Description: [describe what the script does] (e.g. "Generates a directory tree excluding specified directories.")

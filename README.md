@@ -82,6 +82,7 @@ Available Aliases:
 - `aidd-pull-request` <Template file path.> Prepares a pull request using a pre-filled template.
 - `aidd-review` <'changed', 'staged', 'diff-from-main'> Reviews changes based on the specified parameter.
 - `aidd-tree` <Exclude directories pattern.> Generates a directory tree excluding specified directories.
+- generate_aliases 
 -------------------
 
 Usage Example:

@@ -3,6 +3,9 @@ set -e
 
 CURRENT_DIR=$(cd -- "$(dirname -- "$0")" && cd .. && pwd)
 
+. "$(dirname "$0")/../scripts/_.sh"
+. "$(dirname "$0")/../scripts/_/generate_aliases.sh"
+
 echo "Current directory: $CURRENT_DIR"
 
 # Run install-local.sh
@@ -27,43 +30,6 @@ git add README.md
 echo "Generating aliases.sh..."
 SCRIPTS_DIR="$CURRENT_DIR/scripts"
 ALIASES_FILE="$CURRENT_DIR/aliases.sh"
-
-# Start with the header
-cat > "$ALIASES_FILE" <<EOL
-# ~/.ai-driven-dev/aliases.sh
-
-_PATH=~/.ai-driven-dev/scripts
-
-EOL
-
-# Function to process scripts in a directory
-process_scripts() {
-    local dir=$1
-    local relative_path=${dir#$SCRIPTS_DIR/}
-    
-    # Add a comment for the section if it's a subdirectory
-    if [ -n "$relative_path" ]; then
-        echo -e "\n# ${relative_path}" >> "$ALIASES_FILE"
-    fi
-    
-    # Find all .sh files in the directory, excluding _.sh
-    find "$dir" -maxdepth 1 -type f -name "*.sh" ! -name "_.sh" | sort | while read -r script; do
-        local script_name=$(basename "$script" .sh)
-        local alias_name="aidd-$script_name"
-        echo "alias $alias_name=\"\$_PATH/${relative_path:+$relative_path/}$script_name.sh\"" >> "$ALIASES_FILE"
-    done
-}
-
-# Process the main scripts directory
-process_scripts "$SCRIPTS_DIR"
-
-# Process subdirectories
-find "$SCRIPTS_DIR" -type d | while read -r dir; do
-    if [ "$dir" != "$SCRIPTS_DIR" ]; then
-        process_scripts "$dir"
-    fi
-done
-
-echo "aliases.sh generated successfully."
+generate_aliases "$SCRIPTS_DIR" "$ALIASES_FILE"
 
 git add aliases.sh
