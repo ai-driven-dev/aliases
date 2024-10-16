@@ -3,10 +3,10 @@
 set -e  # Exit on error
 
 ###############################################################################
-# Script Name: "files/aidd-git-date.sh"
+# Script Name: "git/aidd-commit-date.sh"
 # Description: Changes the commit date of the specified commit using a specified date.
 # Parameters: [required] Date in the format 'YYYY-MM-DD HH:MM:SS', [optional] Commit ID.
-# Usage: aidd-git-date "2024-10-04 20:13:46" "commitId"
+# Usage: aidd-commit-date "2024-10-04 20:13:46" "commitId"
 ###############################################################################
 
 . "$(dirname "$0")/../_.sh"

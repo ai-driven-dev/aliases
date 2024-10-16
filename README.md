@@ -72,10 +72,10 @@ Available Aliases:
 -------------------
 - `aidd-changes-from-main` Copies the changes from the main branch to the clipboard.
 - `aidd-changes` Copies the current git changes to the clipboard.
+- `aidd-commit-date` <[required] Date in the format 'YYYY-MM-DD HH:MM:SS', Commit ID.> Changes the commit date of the specified commit using a specified date.
 - `aidd-commit-last` Copies the last 10 commit messages to the clipboard.
 - `aidd-commit-msg` Prepares a commit message based on current changes.
 - `aidd-commits-diff-main` Copies the commit differences between the current branch and main.
-- `aidd-date` <[required] Date in the format 'YYYY-MM-DD HH:MM:SS', Commit ID.> Changes the commit date of the specified commit using a specified date.
 - `aidd-help` Provides help and usage information for aidd scripts.
 - `aidd-pull-request` <Template file path.> Prepares a pull request using a pre-filled template.
 - `aidd-review` <'changed', 'staged', 'diff-from-main'> Reviews changes based on the specified parameter.
