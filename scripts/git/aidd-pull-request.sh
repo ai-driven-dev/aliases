@@ -15,8 +15,16 @@ check_binary "git"
 
 # SCRIPT PARAMS
 # --------------------
-DEFAULT_PARAM="$(dirname "$0")/../templates/pull_request_template.md"
+DEFAULT_PARAM="$(dirname "$0")/../../templates/pull_request_template.md"
 PARAM=${1:-$DEFAULT_PARAM}
+
+# Check for --no-context parameter
+INCLUDE_CHANGES=true
+if [ "$1" = "--no-context" ]; then
+  INCLUDE_CHANGES=false
+  shift # Remove the parameter from the list
+  PARAM=${1:-$DEFAULT_PARAM}
+fi
 
 # Validate the parameter
 if [ "$PARAM" = "$DEFAULT_PARAM" ]; then
@@ -47,27 +55,28 @@ Rules:
 - "Instructions" comments must be remove from the output.
 - Output should be properly formated in markdown.
 
-List of commits:
-"""
-$COMMITS
-"""
 
-Changes from main (surrounded by """ delimiters):
-"""
-$CHANGES
-"""
-
-Template file (surrounded by """ delimiters):
-"""
+Template file:
+<template>
 $TEMPLATE
-"""
+</template>
+
+List of commits:
+<commits>
+$COMMITS
+</commits>
 
 The feature I want to implement is:
-"""
+<feature>
 $FEATURE
-"""
+</feature>
 _
 )
+
+if [ "$INCLUDE_CHANGES" = "true" ]; then
+  notice "[aidd-pull-request]: Including changes from main"
+  PROMPT=$(echo "$PROMPT" | sed '/Changes from main:/,+3d')
+fi
 
 # CALLING AI
 # --------------------

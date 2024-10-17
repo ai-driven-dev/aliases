@@ -33,12 +33,13 @@ echo
 # Description
 echo "Provides help and usage information for aidd scripts."
 echo
+
 # Function to list all aliases in the scripts directory
 list_aliases() {
     SCRIPTS_DIR="$(dirname "$0")"
     echo "${NC}Available Aliases:${NC}"
     echo "-------------------"
-    find "$SCRIPTS_DIR" -type f -name "*.sh" ! -name "_.sh" | while read -r script; do
+    find "$SCRIPTS_DIR" -type f -name "*.sh" ! -name "_.sh" ! -path "*/_/*" | while read -r script; do
         # Extract the description from the script
         description=$(grep -E "^# Description:" "$script" | sed 's/# Description: //')
         # Extract the alias from the script name
