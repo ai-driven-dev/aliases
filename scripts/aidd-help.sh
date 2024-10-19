@@ -50,15 +50,15 @@ list_aliases() {
         parameters=$(echo "$parameters" | sed 's/\[optional\] //g')
         # Output the alias, parameters, and description
         if [ -n "$parameters" ] && [ "$parameters" != "None" ]; then
-            echo "- ${SECONDARY}$alias${NC} ${PRIMARY}<${parameters}>${NC} $description"
+            echo "- ${SECONDARY}$alias${NC} ${TERTIARY}<${parameters}>${NC} $description"
         else
             echo "- ${SECONDARY}$alias${NC} $description"
         fi
     done | sort
     echo "-------------------"
     echo
-    echo "${PRIMARY}Usage Example:${NC}"
-    echo "  ${SECONDARY}aidd-help${NC}"
+    echo "${NC}Usage Example:${NC}"
+    echo "  ${TERTIARY}aidd-help${NC}"
 }
 
 # Call the function to list all aliases
