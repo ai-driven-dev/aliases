@@ -13,7 +13,7 @@ A list of aliases and pre-written scripts to help you inject AI into your dev wo
 
 ```shell
 #!/bin/sh
-curl -sSf "https://raw.githubusercontent.com/alexsoyes/ai-driven-dev-community/main/scripts/aiddc/install.sh" | bash
+curl -sSf "https://raw.githubusercontent.com/ai-driven-dev/aliases/main/install.sh" | bash
 ```
 
 ### Proprietary LLM: OpenAI
