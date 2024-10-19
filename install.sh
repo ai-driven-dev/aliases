@@ -2,66 +2,71 @@
 
 set -e
 
-. "$(dirname "$0")/scripts/_.sh"
-
-SOURCE=https://github.com/alexsoyes/ai-driven-dev-aliases/archive/refs/heads/main.zip
-SOURCE_FOLDER_TO_UNZIP=scripts/aiddc
+SOURCE=https://github.com/ai-driven-dev/aliases/archive/refs/heads/main.zip
+SOURCE_FOLDER_TO_UNZIP=.
 TMP=/tmp/aiddc
 DEST=~/.ai-driven-dev
+REPO_NAME=aliases-main
 
-debug "Create TMP folder if not exist."
-mkdir -p $TMP
+echo "Create TMP folder if not exist."
+if [ -d "$TMP" ]; then
+    echo "Removing existing TMP folder."
+    rm -rf "$TMP"
+fi
 
-debug "Download source folder, then extract the subfolder $SOURCE_FOLDER_TO_UNZIP."
+mkdir -vp $TMP
+
+echo "Download source folder, then extract the subfolder $SOURCE_FOLDER_TO_UNZIP."
 wget -qO- $SOURCE | tar -xz -C $TMP
 
-if [ ! -d "$TMP/ai-driven-dev-community-main" ]; then
-  error "Failed to download or extract the source folder."
+if [ ! -d "$TMP/$REPO_NAME" ]; then
+  echo "Failed to download or extract the source folder."
   exit 1
 fi
 
-debug "Create DEST folder if not exist."
+echo "Create DEST folder if not exist."
 mkdir -p $DEST
 
-debug "Move files from $TMP to $DEST."
-for file in $(find $TMP/ai-driven-dev-community-main/$SOURCE_FOLDER_TO_UNZIP -type f); do
-  dest_file="${DEST}/${file#$TMP/ai-driven-dev-community-main/$SOURCE_FOLDER_TO_UNZIP/}"
+echo "Move files from $TMP to $DEST."
+for file in $(find $TMP/$REPO_NAME/$SOURCE_FOLDER_TO_UNZIP -type f); do
+  dest_file="${DEST}/${file#$TMP/$REPO_NAME/$SOURCE_FOLDER_TO_UNZIP/}"
   dest_dir=$(dirname "$dest_file")
   mkdir -p "$dest_dir"
-  if [ -f "$dest_file" ]; then
-    notice "File $dest_file already exists and will not be updated."
-  else
+  if [ ! -f "$dest_file" ]; then
     mv -v "$file" "$dest_file"
   fi
 done
 
+. "$DEST/scripts/_.sh"
+
 chmod +x $DEST/scripts/*.sh
+chmod +x $DEST/scripts/git/*.sh
+chmod +x $DEST/scripts/files/*.sh
 
 debug "Remove the tmp folder."
 rm -rf $TMP
 
-debug "Added the following line to .bashrc: \`source ~/.ai-driven-dev/aliases.sh\`"
+debug "Added the following line to .bashrc: \`source $DEST/aliases.sh\`"
 
-if grep -q 'source ~/.ai-driven-dev/aliases.sh' ~/.bashrc; then
-    success "The aliases are already sourced in .bashrc."
+if grep -q "source $DEST/aliases.sh" ~/.bashrc; then
+    notice "The aliases are already sourced in .bashrc."
 else
     debug "The source line for aliases is missing in .bashrc, adding..."
-    echo 'source ~/.ai-driven-dev/aliases.sh' >> ~/.bashrc
+    echo "source $DEST/aliases.sh" >> ~/.bashrc
 fi
 
 if [ -f ~/.zshrc ]; then
-    if grep -q 'source ~/.ai-driven-dev/aliases.sh' ~/.zshrc; then
-        success "The aliases are already sourced in .zshrc."
+    if grep -q "source $DEST/aliases.sh" ~/.zshrc; then
+        notice "The aliases are already sourced in .zshrc."
     else
         debug "The source line for aliases is missing in .zshrc, adding..."
-        echo 'source ~/.ai-driven-dev/aliases.sh' >> ~/.zshrc
+        echo "source $DEST/aliases.sh" >> ~/.zshrc
     fi
 else
     debug "~/.zshrc does not exist, skipping..."
 fi
 
 cd $DEST
-npm install
+npm install > /dev/null 2>&1
 
-success "AIDD-C installed successfully."
-tree $DEST
+success "AI-Driven-Dev successfully installed: use 'aidd-help' to get started."
