@@ -11,13 +11,13 @@
 . "$(dirname "$0")/_.sh"
 
 # ANSI color codes
-PRIMARY='\033[38;5;20m'     # #020244
-SECONDARY='\033[38;5;197m'  # #DD5475
-TERTIARY='\033[38;5;108m'   # #66CC99
+PRIMARY='\033[38;5;20m'     # #020244 # Blue
+SECONDARY='\033[38;5;197m'  # #DD5475 # Red
+TERTIARY='\033[38;5;108m'   # #66CC99 # Green
 NC='\033[38;5;255m'         # White (No Color)
 
 # ASCII Art for the title
-echo "${PRIMARY}"
+echo "${SECONDARY}"
 echo "    _    ___      ____       _                   ____             "
 echo "   / \  |_ _|    |  _ \ _ __(_)_   _____ _ __   |  _ \  _____   __"
 echo "  / _ \  | |_____| | | | '__| \ \ / / _ \ '_ \  | | | |/ _ \ \ / /"
@@ -27,7 +27,7 @@ echo "${NC}"
 
 # Usage section
 echo
-echo "Usage: ${SECONDARY}aidd-help${NC}"
+echo "Usage: ${TERTIARY}aidd-help${NC}"
 echo
 
 # Description
