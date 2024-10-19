@@ -55,7 +55,6 @@ Rules:
 - "Instructions" comments must be remove from the output.
 - Output should be properly formated in markdown.
 
-
 Template file:
 <template>
 $TEMPLATE
