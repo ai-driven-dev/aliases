@@ -55,22 +55,27 @@ Goal:
 3. Generate git add + git commit message for every changes in the code, following rules.
 
 Rules:
-- Should be formatted in Conventional Commit.
-- Remain consistent with the last commit messages if possibles.
-- Focus on describing the changes made, not the implementation details.
-- Commits should be small and focused on a single change.
+- Format in Conventional Commit.
+- Remain consistent with latest commit messages.
+- Describe changes made, not implementation details.
+- Commit messages should be small and focused on a single change.
 - 1 commit message can have multiple files changes.
 - Answer with shell script ONLY.
 - Use relative git add path based on $CURRENT_DIR.
 - Use "git add --patch" with hunks when little changes are made.
     - When using path option, be sure to "y" in EOF multiple if needed.
-- Do not use "git add --patch" one 1 line changes.
+- Do not use patch if all file content need to be added.
+- Test should have their own commit if possible.
 
 Previous commit messages:
+<commitMessages>
 $PREV_COMMIT_MSG
+</commitMessages>
 
 Current git changes:
+<codeDiff>
 $CHANGES
+</codeDiff>
 
 $(created_files_prompt)
 EOF

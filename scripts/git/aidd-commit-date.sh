@@ -35,6 +35,7 @@ fi
 # Validate the parameters
 if [ -z "$DATE_PARAM" ]; then
   error "No date provided. Please provide a date in the format 'YYYY-MM-DD HH:MM:SS'."
+  notice "Current date is: $(date +'%Y-%m-%d %H:%M:%S')"
   exit 1
 fi
 

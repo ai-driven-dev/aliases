@@ -7,7 +7,7 @@
 # Usage: aidd-tree 'node_modules|dist|documentation'
 ###############################################################################
 
-. "$(dirname "$0")/_.sh"
+. "$(dirname "$0")/../_.sh"
 
 # REQUIREMENTS
 # --------------------
