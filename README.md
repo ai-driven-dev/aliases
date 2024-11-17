@@ -3,22 +3,26 @@
 A list of aliases and pre-written scripts to help you inject AI into your dev workflow.
 
 - [📦 Installation](#-installation)
-  - [Connect to OpenAI's GPT](#connect-to-openais-gpt)
-  - [Connect to a local model (Ollama)](#connect-to-a-local-model-ollama)
+  - [Connect to OpenAI's GPT (recommended)](#connect-to-openais-gpt-recommended)
+  - [Connect to a local model (Ollama supported)](#connect-to-a-local-model-ollama-supported)
 - [💻 Development](#-development)
   - [Scripts](#scripts)
 - [🚀 Usage](#-usage)
 
 ## 📦 Installation
 
+To install the aliases:
+
 ```shell
 #!/bin/bash
 curl -sSf "https://raw.githubusercontent.com/ai-driven-dev/aliases/main/install.sh" | bash
 ```
 
-### Connect to OpenAI's GPT
+Then you need to connect to a LLM API for certain commands.
 
-Provide an OpenAI API key in the `.env` file in `~/.aidd` directory.
+### Connect to OpenAI's GPT (recommended)
+
+Provide an OpenAI API key in the `.env` file in `~/.ai-driven-dev` directory.
 
 ```sh
 OPENAI_API_KEY=sk-<your-api-key>
@@ -30,7 +34,7 @@ Or directly in your `.bashrc` file.
 export OPENAI_API_KEY=sk-<your-api-key>
 ```
 
-### Connect to a local model (Ollama)
+### Connect to a local model (Ollama supported)
 
 Alternatively, you can use Ollama.
 
@@ -44,7 +48,7 @@ Note: Responses might be way less effective than OpenAI's GPT calls.
 
 ## 💻 Development
 
-In the `aiddc` directory, you can run the following command to install the scripts locally and add the aliases to your `.bashrc` file.
+In the cloned directory, you can run the following command to install the scripts locally and add the aliases to your `.bashrc` file.
 
 ### Scripts
 
