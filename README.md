@@ -3,8 +3,8 @@
 A list of aliases and pre-written scripts to help you inject AI into your dev workflow.
 
 - [📦 Installation](#-installation)
-  - [Proprietary LLM: OpenAI](#proprietary-llm-openai)
-  - [Local LLM: Ollama support](#local-llm-ollama-support)
+  - [Connect to OpenAI's GPT](#connect-to-openais-gpt)
+  - [Connect to a local model (Ollama)](#connect-to-a-local-model-ollama)
 - [💻 Development](#-development)
   - [Scripts](#scripts)
 - [🚀 Usage](#-usage)
@@ -12,29 +12,29 @@ A list of aliases and pre-written scripts to help you inject AI into your dev wo
 ## 📦 Installation
 
 ```shell
-#!/bin/sh
+#!/bin/bash
 curl -sSf "https://raw.githubusercontent.com/ai-driven-dev/aliases/main/install.sh" | bash
 ```
 
-### Proprietary LLM: OpenAI
+### Connect to OpenAI's GPT
 
-Provide an OpenAI API key in the `.env` file.
+Provide an OpenAI API key in the `.env` file in `~/.aidd` directory.
 
-```bash
+```sh
 OPENAI_API_KEY=sk-<your-api-key>
 ```
 
 Or directly in your `.bashrc` file.
 
-```bash
+```sh
 export OPENAI_API_KEY=sk-<your-api-key>
 ```
 
-### Local LLM: Ollama support
+### Connect to a local model (Ollama)
 
 Alternatively, you can use Ollama.
 
-You just need to provide the following environment variable:
+Provide a local model name in the `.env` file in `~/.aidd` directory.
 
 ```bash
 LOCAL_MODEL=codellama # deepseek-coder, qwen2 etc.
@@ -51,8 +51,7 @@ In the `aiddc` directory, you can run the following command to install the scrip
 When you do want to test your new scripts without pushing those to the repository.
 
 ```bash
-cd scripts/aiddc
-bash install-local.sh && source ~/.bashrc && aidd-commit-msg  
+bash install-local.sh && source ~/.bashrc && aidd-help
 ```
 
 ## 🚀 Usage
