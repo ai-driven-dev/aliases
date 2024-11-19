@@ -4,7 +4,7 @@ set -e
 
 SOURCE=https://github.com/ai-driven-dev/aliases/archive/refs/heads/main.zip
 SOURCE_FOLDER_TO_UNZIP=.
-TMP=/tmp/aiddc
+TMP=/tmp/aidd
 DEST=~/.ai-driven-dev
 REPO_NAME=aliases-main
 
