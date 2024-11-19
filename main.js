@@ -310,7 +310,7 @@ console.log(`
                                       
 *******************************************
 *                                         *
-*       Welcome to the AIDDC Community    *
+*       Welcome to the AIDD Community     *
 *                                         *
 *            ai-driven-dev.com            *
 *                                         *
