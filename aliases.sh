@@ -3,11 +3,12 @@
 _PATH=~/.ai-driven-dev/scripts
 
 
-# /Users/alexsoyer/Projects/AIDDC/aliases/scripts
+# scripts
 alias aidd-help="$_PATH/aidd-help.sh"
 
 # files
 alias aidd-tree="$_PATH/files/aidd-tree.sh"
+alias aidd-ts-doc="$_PATH/files/aidd-ts-doc.sh"
 
 # git
 alias aidd-changes-from-main="$_PATH/git/aidd-changes-from-main.sh"

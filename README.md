@@ -8,6 +8,7 @@ A list of aliases and pre-written scripts to help you inject AI into your dev wo
 - [💻 Development](#-development)
   - [Scripts](#scripts)
 - [🚀 Usage](#-usage)
+- [Example](#example)
 
 ## 📦 Installation
 
@@ -85,6 +86,7 @@ Available Aliases:
 - `aidd-pull-request` <Template file path.> Prepares a pull request using a pre-filled template.
 - `aidd-review` <'changed', 'staged', 'diff-from-main'> Reviews changes based on the specified parameter.
 - `aidd-tree` <Exclude directories pattern.> Generates a directory tree excluding specified directories.
+- `aidd-ts-doc` Generates TypeScript documentation using typedoc and combines markdown files
 -------------------
 
 Usage Example:
