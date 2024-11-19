@@ -27,7 +27,7 @@ EOL
         # Add a comment for the section if it's a subdirectory
         if [ -n "$relative_path" ]; then
             echo "" >> "$ALIASES_FILE"
-            echo "# ${relative_path}" >> "$ALIASES_FILE"
+            echo "# $(basename "$relative_path")" >> "$ALIASES_FILE"
         fi
         
         # Find all .sh files in the directory, excluding _.sh
