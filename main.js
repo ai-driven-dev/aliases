@@ -217,35 +217,46 @@ const callOpenAiApi = async (prompt, systemMessage = GEN_AI_SYSTEM_MESSAGE, maxT
  * @param {string} [model="gpt-4o"] - The model used.
  * @returns {number} - The total cost calculated.
  */
-const openaiApiCalculateCost = (usage, model = GEN_AI_MODEL) => {
+const openaiApiCalculateCost = (usage, model = "gpt-4o") => {
     const pricing = {
         'gpt-4o': {
-            'prompt': 0.05,
-            'completion': 0.015,
+            'prompt': 0.05, // cost per 1000 tokens
+            'completion': 0.015 // cost per 1000 tokens
         }
     };
 
+    // Validate model pricing
     if (!pricing[model]) {
         throw new Error("Invalid model specified");
     }
 
     const modelPricing = pricing[model];
-    const promptCost = usage.prompt_tokens * modelPricing.prompt / 1000;
-    const completionCost = usage.completion_tokens * modelPricing.completion / 1000;
-    let totalCost = promptCost + completionCost;
 
-    // round to 6 decimals
-    totalCost = totalCost.toFixed(6);
+    // Validate usage input
+    if (!usage || typeof usage.prompt_tokens !== "number" || typeof usage.completion_tokens !== "number") {
+        throw new Error("Invalid usage details provided");
+    }
 
-    console.log(`\n🚚 Usage:`);
-    console.warn(`--------------------\n`);
-    console.warn(`Prompt: ${usage.prompt_tokens.toLocaleString()} tokens`);
-    console.warn(`Completion: ${usage.completion_tokens.toLocaleString()} tokens`);
-    console.warn(`Total: ${usage.total_tokens.toLocaleString()} tokens`);
-    console.warn(`Cost for ${model}: $${parseFloat(totalCost).toFixed(2)}\n`);
-    console.warn(`--------------------\n`);
+    // Calculate costs
+    const promptCost = (usage.prompt_tokens * modelPricing.prompt) / 1000;
+    const completionCost = (usage.completion_tokens * modelPricing.completion) / 1000;
+    const totalCost = promptCost + completionCost;
 
-    return parseFloat(totalCost);
+    // Log usage details
+    const totalTokens = usage.prompt_tokens + usage.completion_tokens;
+
+    console.log("\n🚚 Usage:");
+    console.log("--------------------");
+    console.table({
+        "Prompt Tokens": usage.prompt_tokens.toLocaleString(),
+        "Completion Tokens": usage.completion_tokens.toLocaleString(),
+        "Total Tokens": totalTokens.toLocaleString(),
+        "Cost ($)": `$${totalCost.toFixed(6)}`
+    });
+    console.log("--------------------");
+
+    // Return cost rounded to 6 decimals as a number
+    return parseFloat(totalCost.toFixed(6));
 };
 
 /**
