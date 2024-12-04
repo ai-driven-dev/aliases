@@ -26,8 +26,8 @@ fi
 echo "Create DEST folder if not exist."
 mkdir -p $DEST
 
-echo "Move files from $TMP to $DEST."
-mv -v $TMP/$REPO_NAME/* $DEST/
+echo "Copy files from $TMP to $DEST."
+cp -r $TMP/$REPO_NAME/* $DEST/
 
 . "$DEST/scripts/_.sh"
 
