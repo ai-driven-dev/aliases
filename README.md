@@ -8,7 +8,6 @@ A list of aliases and pre-written scripts to help you inject AI into your dev wo
 - [💻 Development](#-development)
   - [Scripts](#scripts)
 - [🚀 Usage](#-usage)
-- [Example](#example)
 
 ## 📦 Installation
 
@@ -23,7 +22,7 @@ Then you need to connect to a LLM API for certain commands.
 
 ### Connect to OpenAI's GPT (recommended)
 
-Provide an OpenAI API key in the `.env` file in `~/.ai-driven-dev` directory.
+Provide an OpenAI API key in `~/.ai-driven-dev/.env`.
 
 ```sh
 OPENAI_API_KEY=sk-<your-api-key>

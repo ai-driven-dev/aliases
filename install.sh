@@ -3,10 +3,9 @@
 set -e
 
 SOURCE=https://github.com/ai-driven-dev/aliases/archive/refs/heads/main.zip
-SOURCE_FOLDER_TO_UNZIP=.
-TMP=/tmp/aidd
 DEST=~/.ai-driven-dev
 REPO_NAME=aliases-main
+TMP=/tmp/aidd
 
 echo "Create TMP folder if not exist."
 if [ -d "$TMP" ]; then
@@ -16,7 +15,7 @@ fi
 
 mkdir -vp $TMP
 
-echo "Download source folder, then extract the subfolder $SOURCE_FOLDER_TO_UNZIP."
+echo "Download and extract source."
 wget -qO- $SOURCE | tar -xz -C $TMP
 
 if [ ! -d "$TMP/$REPO_NAME" ]; then
@@ -28,14 +27,7 @@ echo "Create DEST folder if not exist."
 mkdir -p $DEST
 
 echo "Move files from $TMP to $DEST."
-for file in $(find $TMP/$REPO_NAME/$SOURCE_FOLDER_TO_UNZIP -type f); do
-  dest_file="${DEST}/${file#$TMP/$REPO_NAME/$SOURCE_FOLDER_TO_UNZIP/}"
-  dest_dir=$(dirname "$dest_file")
-  mkdir -p "$dest_dir"
-  if [ ! -f "$dest_file" ]; then
-    mv -v "$file" "$dest_file"
-  fi
-done
+mv -v $TMP/$REPO_NAME/* $DEST/
 
 . "$DEST/scripts/_.sh"
 
