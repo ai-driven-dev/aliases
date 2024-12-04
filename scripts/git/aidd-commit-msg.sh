@@ -35,19 +35,30 @@ created_files_prompt() {
         return
     fi
 
-    echo "Created files:"
+    echo "<created_files>"
     
     for file in $UNTRACKED; do
         echo "---"
         echo "$file"
-        cat "$file"
+        if file "$file" | grep -q "text"; then
+            cat "$file"
+        fi
         echo "---"
         echo ""
     done
+
+    echo "</created_files>"
 }
 
 example_script() {
     cat << 'EOFSCRIPT'
+# 
+# Changes:
+# --------------------
+# 1: [Brief description of functional change]
+# 2: [Brief description of functional change]
+# ...
+# 
 # Change 1: [Brief description of functional change]
 git add [relative path to file(s)]
 git commit -m "feat: Implement new feature X"
@@ -68,22 +79,18 @@ EOFSCRIPT
 # PROMPT
 # --------------------
 PROMPT=$(cat <<EOF
-You are a Git commit message generator tasked with creating a shell script that adds and commits code changes. Your goal is to analyze Git changes and produce meaningful, consistent commit messages following specific rules.
-
-Here are the Git changes to analyze:
+Context:
 <git_changes>
 $CHANGES
 </git_changes>
 
-Previous commit messages:
 <previous_commit_messages>
 $PREV_COMMIT_MSG
 </previous_commit_messages>
 
 $(created_files_prompt)
 
-Please follow these steps to generate the shell script:
-
+Steps:
 1. Analyze the Git changes and summarize functional changes in a numbered list.
 2. Identify hunks (areas of change within files) but do not display them.
 3. Generate git add commands and commit messages for the changes, following the rules below.
@@ -97,9 +104,10 @@ Rules for commit messages:
 
 Rules for git add commands:
 - Use relative paths based on $CURRENT_DIR.
-- Use "git add --patch" with hunks for small changes.
+- Use "git add --patch" ONLY if at least two functional changes concern the same file.
 - When using the patch option, include "y" in EOF multiple times if needed.
 - Do not use patch if the entire file content needs to be added.
+- Generate separate commits for test files when possible.
 
 Additional guidelines:
 - Generate separate commits for test files when possible.
