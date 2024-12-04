@@ -13,8 +13,7 @@ A list of aliases and pre-written scripts to help you inject AI into your dev wo
 
 To install the aliases:
 
-```shell
-#!/bin/bash
+```bash
 curl -sSf "https://raw.githubusercontent.com/ai-driven-dev/aliases/main/install.sh" | bash
 ```
 
@@ -40,7 +39,7 @@ Alternatively, you can use Ollama.
 
 Provide a local model name in the `.env` file in `~/.aidd` directory.
 
-```bash
+```sh
 LOCAL_MODEL=codellama # deepseek-coder, qwen2 etc.
 ```
 
