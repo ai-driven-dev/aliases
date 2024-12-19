@@ -30,4 +30,4 @@ CURRENT_DIR=$(basename "$(pwd)" | sed -e 's/[^[:alnum:]]/-/g' | tr -s '-' | tr A
 
 # GENERATE TREE OUTPUT
 # --------------------
-tree --du -h -aIif "$EXCLUDE_DIRS"
+tree -aIif "$EXCLUDE_DIRS"
