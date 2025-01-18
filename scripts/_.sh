@@ -45,7 +45,7 @@ error() {
 #   $1 - The debug message to print.
 #
 debug() {
-    if [ "${DEBUG}" = "true" ]; then
+    if [ -n "${DEBUG}" ] && [ "${DEBUG}" = "true" ]; then
         echo "---> DEBUG: $1"
     fi
 }
@@ -82,7 +82,12 @@ else
   exit 1
 fi
 
-# Checking if OPENAI_API_KEY is set
+#
+# Call AI function
+# Calls the main AI script using Node.js.
+#
+call_ai() {
+    # Checking if OPENAI_API_KEY is set
 # Exits with an error message if the OPENAI_API_KEY environment variable is not set.
 if [ -z "$OPENAI_API_KEY" ]; then
     echo "OPENAI_API_KEY is not set. Please set it to your OpenAI API key."
@@ -90,11 +95,6 @@ if [ -z "$OPENAI_API_KEY" ]; then
     exit 1
 fi
 
-#
-# Call AI function
-# Calls the main AI script using Node.js.
-#
-call_ai() {
     echo "$1" > "$BASE_DIR/../.prompt"
 
     debug "Prompt size is: $(wc -c "$BASE_DIR/../.prompt")"

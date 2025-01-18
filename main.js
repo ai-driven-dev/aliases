@@ -36,25 +36,26 @@ console.info = (function(origInfo) {
 
 // Load environment variables
 const loadEnv = () => {
-    const ENV_PATH = path.join(__dirname, '.env');
-    if (fs.existsSync(ENV_PATH)) {
-        const envConfig = fs.readFileSync(ENV_PATH, 'utf-8');
-        envConfig.split('\n').forEach(line => {
-            const [key, value] = line.split('=');
-            if (key && value) {
-                process.env[key.trim()] = value.trim();
-            }
-        });
-    } else {
-        console.error('.env file not found. Exiting.');
-        process.exit(1);
-    }
+  const ENV_PATH = path.join(__dirname, ".env");
+  if (fs.existsSync(ENV_PATH)) {
+    const envConfig = fs.readFileSync(ENV_PATH, "utf-8");
+    envConfig.split("\n").forEach((line) => {
+      const [key, value] = line.split("=");
+      if (key && value) {
+        process.env[key.trim()] = value.trim();
+      }
+    });
+  } else {
+    console.error(".env file not found. Exiting.");
+    console.error("https://github.com/ai-driven-dev/aliases");
+    process.exit(1);
+  }
 };
 
 loadEnv();
 
 // Gen-AI parameters
-const GEN_AI_MODEL = process.env.LOCAL_MODEL || 'gpt-4o';
+const GEN_AI_MODEL = process.env.LOCAL_MODEL || "gpt-4o";
 const GEN_AI_MAX_TOKENS = 600;
 const GEN_AI_TEMPERATURE = 1;
 const GEN_AI_SYSTEM_MESSAGE = `
@@ -68,16 +69,15 @@ Remember that code that will be provided to you is the result of a "git diff" co
 
 /**
  * Calls the Ollama API with a specified prompt and model.
- * 
+ *
  * This function sends a POST request to the Ollama API endpoint, submitting a JSON payload
  * that includes the model and input data. It logs the API response to the console.
- * 
+ *
  * @param {string} prompt - The input data to be processed by the Ollama API.
  * @param {string} [model=GEN_AI_MODEL] - The model to use for processing the input. Defaults to GEN_AI_MODEL.
  */
-function callOllamaApi(prompt, model=GEN_AI_MODEL) {
-    
-    const cleanPrompt = prompt.replace(/[^\x20-\x7E\t]/g, '');
+function callOllamaApi(prompt, model = GEN_AI_MODEL) {
+  const cleanPrompt = prompt.replace(/[^\x20-\x7E\t]/g, "");
 
   const data = JSON.stringify({
     model,
@@ -85,54 +85,60 @@ function callOllamaApi(prompt, model=GEN_AI_MODEL) {
     system: GEN_AI_SYSTEM_MESSAGE,
     stream: false,
     options: {
-        temperature: GEN_AI_TEMPERATURE,
+      temperature: GEN_AI_TEMPERATURE
     },
-    keep_alive: '0',
+    keep_alive: "0"
   });
 
   const options = {
-    hostname: '127.0.0.1',
+    hostname: "127.0.0.1",
     port: 11434,
-    path: '/api/generate',
-    method: 'POST',
+    path: "/api/generate",
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      'Content-Length': data.length
+      "Content-Type": "application/json",
+      "Content-Length": data.length
     }
   };
 
-    return new Promise((resolve, reject) => {
-        const req = http.request(options, (res) => {
-            let responseBody = '';
+  return new Promise((resolve, reject) => {
+    const req = http.request(options, (res) => {
+      let responseBody = "";
 
-            res.on('data', (chunk) => {
-            responseBody += chunk;
-            });
+      res.on("data", (chunk) => {
+        responseBody += chunk;
+      });
 
-            res.on('end', () => {
-                const parsedResponse = JSON.parse(responseBody);
+      res.on("end", () => {
+        const parsedResponse = JSON.parse(responseBody);
 
-                if (parsedResponse.error) {
-                    return reject(new Error(parsedResponse.error));
-                }
+        if (parsedResponse.error) {
+          return reject(new Error(parsedResponse.error));
+        }
 
-                console.log(parsedResponse)
-    console.log(`\n🚚 Usage:`);
-    console.warn(`--------------------\n`);
-    console.warn(`Loading time: ${(parsedResponse.total_duration / 1000000000).toFixed(2)} seconds.`);
-    console.warn(`Number of tokens in prompt: ${parsedResponse.prompt_eval_count}.`);
-    console.warn(`--------------------\n`);
-            resolve(parsedResponse.response);
-            });
-        })
-        
-        req.on('error', (error) => {
-            console.error('Error:', error);
-        });
-        
-        req.write(data);
-        req.end();
+        console.log(parsedResponse);
+        console.log(`\n🚚 Usage:`);
+        console.warn(`--------------------\n`);
+        console.warn(
+          `Loading time: ${(parsedResponse.total_duration / 1000000000).toFixed(
+            2
+          )} seconds.`
+        );
+        console.warn(
+          `Number of tokens in prompt: ${parsedResponse.prompt_eval_count}.`
+        );
+        console.warn(`--------------------\n`);
+        resolve(parsedResponse.response);
+      });
     });
+
+    req.on("error", (error) => {
+      console.error("Error:", error);
+    });
+
+    req.write(data);
+    req.end();
+  });
 }
 
 /**
