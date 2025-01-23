@@ -63,38 +63,11 @@ check_binary() {
 
 check_binary "node"
 
-# Get env if exist from previous dir.
-# Loads environment variables from the .env file if it exists.
-# Exits with an error message if the .env file is not found.
-BASE_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
-ENV_PATH="$BASE_DIR/../.env"
-
-if [ -f "$ENV_PATH" ]; then
-    . "$ENV_PATH"
-    debug ".env file loaded"
-else
-  error "No .env file found in dir $BASE_DIR"
-  echo ""
-  echo "You can create one by copying .env.example to .env and adding your OpenAI API key."
-  echo ""
-  cat "$BASE_DIR/../.env.example"
-  echo ""
-  exit 1
-fi
-
 #
 # Call AI function
 # Calls the main AI script using Node.js.
 #
 call_ai() {
-    # Checking if OPENAI_API_KEY is set
-# Exits with an error message if the OPENAI_API_KEY environment variable is not set.
-if [ -z "$OPENAI_API_KEY" ]; then
-    echo "OPENAI_API_KEY is not set. Please set it to your OpenAI API key."
-    echo "You can find it in your OpenAI dashboard: https://platform.openai.com/api-keys"
-    exit 1
-fi
-
     echo "$1" > "$BASE_DIR/../.prompt"
 
     debug "Prompt size is: $(wc -c "$BASE_DIR/../.prompt")"
