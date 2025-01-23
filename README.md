@@ -2,12 +2,13 @@
 
 A list of aliases and pre-written scripts to help you inject AI into your dev workflow.
 
-- [📦 Installation](#-installation)
-  - [Connect to OpenAI's GPT (recommended)](#connect-to-openais-gpt-recommended)
-  - [Connect to a local model (Ollama supported)](#connect-to-a-local-model-ollama-supported)
-- [💻 Development](#-development)
-  - [Scripts](#scripts)
-- [🚀 Usage](#-usage)
+- [AI-Driven Dev {Aliases}](#ai-driven-dev-aliases)
+  - [📦 Installation](#-installation)
+    - [Connect to OpenAI's GPT (recommended)](#connect-to-openais-gpt-recommended)
+    - [Connect to a local model (Ollama supported)](#connect-to-a-local-model-ollama-supported)
+  - [💻 Development](#-development)
+    - [Scripts](#scripts)
+  - [🚀 Usage](#-usage)
 
 ## 📦 Installation
 
@@ -15,6 +16,18 @@ To install the aliases:
 
 ```bash
 curl -sSf "https://raw.githubusercontent.com/ai-driven-dev/aliases/main/install.sh" | bash
+````
+
+Expected output:
+
+```shell
+# Create TMP folder if not exist.
+# Removing existing TMP folder.
+# /tmp/aidd
+# Download and extract source.
+# Create DEST folder if not exist.
+# Copy files from /tmp/aidd to /Users/alexsoyes/.ai-driven-dev.
+# AI-Driven-Dev successfully installed: use 'aidd-help' to get started.
 ```
 
 Then you need to connect to a LLM API for certain commands.
