@@ -1,16 +1,16 @@
-# AI-Driven Dev {Aliases}
+# 📦 AI-Driven Dev {Aliases}
 
 A list of aliases and pre-written scripts to help you inject AI into your dev workflow.
 
-- [AI-Driven Dev {Aliases}](#ai-driven-dev-aliases)
-  - [📦 Installation](#-installation)
+- [📦 AI-Driven Dev {Aliases}](#-ai-driven-dev-aliases)
+  - [🖥️ Installation](#️-installation)
     - [Connect to OpenAI's GPT (recommended)](#connect-to-openais-gpt-recommended)
     - [Connect to a local model (Ollama supported)](#connect-to-a-local-model-ollama-supported)
-  - [💻 Development](#-development)
+  - [⌨️ Development](#️-development)
     - [Scripts](#scripts)
   - [🚀 Usage](#-usage)
 
-## 📦 Installation
+## 🖥️ Installation
 
 To install the aliases:
 
@@ -58,7 +58,7 @@ LOCAL_MODEL=codellama # deepseek-coder, qwen2 etc.
 
 Note: Responses might be way less effective than OpenAI's GPT calls.
 
-## 💻 Development
+## ⌨️ Development
 
 In the cloned directory, you can run the following command to install the scripts locally and add the aliases to your `.bashrc` file.
 
