@@ -20,7 +20,7 @@ EXCLUDE=${1:-}
 # EXCLUDE DIRS
 # --------------------
 EXCLUDE_DIRS=$(grep -v '^#' .gitignore | grep -v '^$' | sed 's|^/||' | sed 's|/$||' | sed 's/\*//g' | sed -e :a -e '$!N; s/\n/|/; ta')
-EXCLUDE_DIRS="${EXCLUDE_DIRS}|project-structure|.git"
+EXCLUDE_DIRS="${EXCLUDE_DIRS}|project-structure|dist|build|coverage|archives|.DS_Store|.git"
 
 if [ -n "$EXCLUDE" ]; then
   EXCLUDE_DIRS="${EXCLUDE_DIRS}|$EXCLUDE"
